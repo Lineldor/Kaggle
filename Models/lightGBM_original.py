@@ -175,7 +175,7 @@ def features(selected_orders, labels_given=False):
 
     print('user_X_product related features')
     df['z'] = df.user_id * 100000 + df.product_id
-    df.drop(['user_id'], axis=1, inplace=True)
+    #df.drop(['user_id'], axis=1, inplace=True)
     df['UP_orders'] = df.z.map(userXproduct.nb_orders)
     df['UP_orders_ratio'] = (df.UP_orders / df.user_total_orders).astype(np.float32)
     df['UP_last_order_id'] = df.z.map(userXproduct.last_order_id)
@@ -194,11 +194,11 @@ def features(selected_orders, labels_given=False):
 
 df_train, labels = features(train_orders, labels_given=True)
 
-f_to_use = ['user_total_orders', 'user_total_items', 'total_distinct_items',
+f_to_use = ['user_id', 'user_total_orders', 'user_total_items', 'total_distinct_items',
        'user_average_days_between_orders', 'user_average_basket',
        'order_hour_of_day', 'days_since_prior_order', 'days_since_ratio',
        'aisle_id', 'department_id', 'product_orders', 'product_reorders',
-       'product_reorder_rate', 'UP_orders', 'UP_orders_ratio',
+       'product_reorder_rate',  'UP_orders', 'UP_orders_ratio',
        'UP_average_pos_in_cart', 'UP_reorder_rate', 'UP_orders_since_last',
        'UP_delta_hour_vs_last'] # 'dow', 'UP_same_dow_as_last_order'
 
